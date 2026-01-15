@@ -1,0 +1,389 @@
+/* ===== CSS Variables (Design System) ===== */
+:root {
+  --primary-color: #b2b3f8;
+  --primary-hover: #7e79d1;
+  --primary-light: #e0e7ff;
+  --background-color: #f9fafb;
+  --card-background: #ffffff;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+  --border-color: #e5e7eb;
+  --border-light: #f3f4f6;
+  --danger-color: #ef4444;
+  --danger-hover: #dc2626;
+  --success-color: #10b981;
+  --success-hover: #059669;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --transition: all 0.3s ease;
+}
+
+/* ===== CSS Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+/* ===== Global Styles ===== */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ===== App Container ===== */
+.app-container {
+  max-width: 600px;
+  width: 100%;
+  margin: 40px auto;
+  padding: 0 20px;
+  flex: 1;
+  background-color: var(--card-background);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+/* ===== Header Styles ===== */
+.header {
+  padding: 32px 24px;
+  border-bottom: 1px solid var(--border-color);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+}
+
+.header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 24px;
+  letter-spacing: -0.5px;
+}
+
+.header-input-group {
+  display: flex;
+  gap: 8px;
+}
+
+.header input[type="text"] {
+  flex: 1;
+  padding: 12px 16px;
+  font-size: 16px;
+  border: 2px solid transparent;
+  border-radius: var(--radius-md);
+  background-color: rgba(255, 255, 255, 0.95);
+  color: var(--text-primary);
+  transition: var(--transition);
+  font-family: inherit;
+}
+
+.header input[type="text"]:focus {
+  outline: none;
+  background-color: white;
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.header input[type="text"]::placeholder {
+  color: var(--text-muted);
+}
+
+.header button {
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 2px solid white;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: inherit;
+}
+
+.header button:hover {
+  background-color: white;
+  color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.header button:active {
+  transform: translateY(0);
+}
+
+/* ===== TodoList Styles ===== */
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.todo-list li {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: var(--transition);
+}
+
+.todo-list li:last-child {
+  border-bottom: none;
+}
+
+.todo-list li:hover {
+  background-color: var(--background-color);
+}
+
+/* ===== TodoItem Checkbox ===== */
+.todo-item-checkbox {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--primary-color);
+}
+
+/* ===== TodoItem Text ===== */
+.todo-item-text {
+  flex: 1;
+  word-break: break-word;
+  transition: var(--transition);
+}
+
+.todo-item-text.completed {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+/* ===== TodoItem Buttons ===== */
+.todo-item-buttons {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.todo-item-btn {
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: inherit;
+}
+
+.todo-item-btn-edit {
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+}
+
+.todo-item-btn-edit:hover {
+  background-color: var(--primary-color);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.todo-item-btn-delete {
+  background-color: #fee2e2;
+  color: var(--danger-color);
+}
+
+.todo-item-btn-delete:hover {
+  background-color: var(--danger-color);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.todo-item-btn-save {
+  background-color: #dcfce7;
+  color: var(--success-color);
+}
+
+.todo-item-btn-save:hover {
+  background-color: var(--success-color);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.todo-item-btn-cancel {
+  background-color: #f3f4f6;
+  color: var(--text-secondary);
+}
+
+.todo-item-btn-cancel:hover {
+  background-color: var(--text-secondary);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ===== TodoItem Edit Mode ===== */
+.todo-item-edit-input {
+  flex: 1;
+  padding: 10px 12px;
+  font-size: 16px;
+  border: 2px solid var(--primary-color);
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  color: var(--text-primary);
+}
+
+.todo-item-edit-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+/* ===== Empty State ===== */
+.todo-empty-state {
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 16px;
+}
+
+/* ===== Footer (Filters) ===== */
+.footer {
+  padding: 20px 24px;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  background-color: var(--background-color);
+}
+
+.footer-count {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.footer-filters {
+  display: flex;
+  gap: 8px;
+}
+
+.filter-btn {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  background-color: var(--border-light);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: inherit;
+  text-transform: capitalize;
+}
+
+.filter-btn:hover {
+  background-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.filter-btn.active {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.clear-completed-btn {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  border-radius: var(--radius-sm);
+  background-color: #fee2e2;
+  color: var(--danger-color);
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: inherit;
+}
+
+.clear-completed-btn:hover {
+  background-color: var(--danger-color);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ===== Copyright Notice ===== */
+.copyright-notice {
+  padding: 20px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+  background-color: var(--background-color);
+  border-top: 1px solid var(--border-color);
+  margin-top: auto;
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 640px) {
+  .app-container {
+    margin: 20px auto;
+    border-radius: var(--radius-md);
+  }
+
+  .header {
+    padding: 24px 16px;
+  }
+
+  .header h1 {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+
+  .header-input-group {
+    flex-direction: column;
+  }
+
+  .header button {
+    width: 100%;
+  }
+
+  .todo-list li {
+    padding: 12px 16px;
+  }
+
+  .footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .footer-filters {
+    justify-content: center;
+  }
+
+  .clear-completed-btn {
+    width: 100%;
+  }
+}
