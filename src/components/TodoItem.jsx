@@ -5,8 +5,9 @@ const TodoItem = ({ task, toggleTask, deleteTask, editTask }) => {
   const [editText, setEditText] = useState(task.text);
 
   const handleSave = () => {
-    if (editText.trim()) {
-      editTask(task.id, editText);
+    const trimmedText = editText.trim();
+    if (trimmedText) {
+      editTask(task.id, trimmedText);
       setIsEditing(false);
     }
   };

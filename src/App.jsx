@@ -5,8 +5,13 @@ import Footer from './components/Footer';
 
 const App = () => {
   const [tasks, setTasks] = useState(() => {
-    const saved = localStorage.getItem('tasks');
-    return saved ? JSON.parse(saved) : [];
+    try {
+      const saved = localStorage.getItem('tasks');
+      return saved ? JSON.parse(saved) : [];
+    } catch (error) {
+      console.error('Failed to parse tasks from localStorage:', error);
+      return [];
+    }
   });
   const [filter, setFilter] = useState('all');
 
@@ -17,7 +22,7 @@ const App = () => {
 
   const addTask = (text) => {
     const newTask = {
-      id: Date.now(),
+      id: Date.now() + Math.random().toString(36).substr(2, 9),
       text: text,
       completed: false
     };
