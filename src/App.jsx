@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Confetti from 'react-confetti';
 import Header from './components/Header';
 import TodoList from './components/TodoList';
 import Footer from './components/Footer';
@@ -14,10 +15,30 @@ const App = () => {
     }
   });
   const [filter, setFilter] = useState('all');
+  const [showConfetti, setShowConfetti] = useState(false);
 
   // Save tasks to localStorage whenever tasks change
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]);
+
+  // Calculate progress and trigger confetti
+  useEffect(() => {
+    if (tasks.length > 0) {
+      const completedCount = tasks.filter((task) => task.completed).length;
+      const progressPercentage = (completedCount / tasks.length) * 100;
+      
+      if (progressPercentage === 100) {
+        setShowConfetti(true);
+        // Auto-hide confetti after 3 seconds
+        const timer = setTimeout(() => setShowConfetti(false), 3000);
+        return () => clearTimeout(timer);
+      } else {
+        setShowConfetti(false);
+      }
+    } else {
+      setShowConfetti(false);
+    }
   }, [tasks]);
 
   const addTask = (text) => {
@@ -62,11 +83,19 @@ const App = () => {
 
   // Count active (incomplete) tasks
   const activeCount = tasks.filter((task) => !task.completed).length;
+  const completedCount = tasks.length - activeCount;
+  const progressPercentage = tasks.length > 0 ? (completedCount / tasks.length) * 100 : 0;
 
   return (
     <div>
+      {showConfetti && <Confetti recycle={false} numberOfPieces={200} />}
       <div className="app-container">
-        <Header onAdd={addTask} />
+        <Header 
+          onAdd={addTask}
+          progress={progressPercentage}
+          completedCount={completedCount}
+          totalCount={tasks.length}
+        />
         <TodoList tasks={filteredTasks} toggleTask={toggleTask} deleteTask={deleteTask} editTask={editTask} />
         <Footer
           activeCount={activeCount}
