@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ProgressBar from './ProgressBar';
 
-const Header = ({ onAdd, progress = 0, completedCount = 0, totalCount = 0 }) => {
+const Header = ({ onAdd }) => {
   const [text, setText] = useState('');
   const [error, setError] = useState('');
 
@@ -9,15 +9,17 @@ const Header = ({ onAdd, progress = 0, completedCount = 0, totalCount = 0 }) => 
     e.preventDefault();
     setError('');
 
-    // Attempt to add task
-    const success = onAdd(text);
+    const trimmedText = text.trim();
 
-    if (success) {
-      setText('');
-    } else {
-      // Show error for empty input
+    // Validate input locally
+    if (!trimmedText) {
       setError('Please enter a task description');
+      return;
     }
+
+    // Add validated task
+    onAdd(trimmedText);
+    setText('');
   };
 
   const handleInputChange = (e) => {
@@ -70,10 +72,8 @@ const Header = ({ onAdd, progress = 0, completedCount = 0, totalCount = 0 }) => 
     <header className="header">
       {/* Brand Section */}
       <div className="brand-section">
-        <div className="brand-container">
-          <LogoIcon />
-          <h1 className="brand-title">Task Manager</h1>
-        </div>
+        <LogoIcon />
+        <h1 className="brand-title">Task Manager</h1>
       </div>
 
       {/* Input & Button Form */}
@@ -96,15 +96,6 @@ const Header = ({ onAdd, progress = 0, completedCount = 0, totalCount = 0 }) => 
         <div className="error-message" role="alert" aria-live="polite">
           {error}
         </div>
-      )}
-
-      {/* Progress Bar */}
-      {totalCount > 0 && (
-        <ProgressBar 
-          progress={progress}
-          completedCount={completedCount}
-          totalCount={totalCount}
-        />
       )}
     </header>
   );

@@ -42,6 +42,7 @@ const App = () => {
   }, [tasks]);
 
   const addTask = (text) => {
+    // Text is pre-validated in Header component
     const newTask = {
       id: Date.now() + Math.random().toString(36).substr(2, 9),
       text: text,
